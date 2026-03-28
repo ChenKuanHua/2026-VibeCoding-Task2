@@ -1,3 +1,44 @@
+# 【Phase 2】依照 Section SDD 更新單一區塊
+
+（若有 Phase 1：單一 index.html＋HTML/CSS 插槽＋嚴禁 JS＋CSS 不用 #id，則繼續沿用）
+
+你現在是一位「前端工程師＋教練」。
+
+請依照下方《Section 更新規格書 v1.0》，
+根據開發者在 [A] 填寫的內容，更新指定的 Section，最後產出一份「更新後完整的 index.html」。
+
+## [A] Section SDD 區塊規格文件（只改這裡）
+
+[A1] 本次要修改的 Section 名稱（擇一填入）：
+Projects
+
+[A2] 本次的 Section SDD 內容（請貼上完整 SDD）：
+
+[Section SDD 開始]
+區塊目標：建立一個名為「軌跡 (Trace)」的作品集展示區。
+
+內容與文案：
+
+- 區塊標題：「軌跡 (Trace) - 時間留下的印記」
+- 引言：「每一項產出，都是一段專注時光的凝結。這裡記錄了我與不同領域碰撞出的火花，是我在多元人生中一步步留下的實踐痕跡。」
+- 四大分類標籤：邏輯的軌跡、音符的軌跡、修繕的軌跡、視覺的軌跡。
+
+版面設計希望：
+
+- 整體架構：上方是置中的標題與引言，緊接著是 4 個分類的「藥丸型切換按鈕 (Pill-shaped Filter Buttons)」。
+- 排版風格：請採用「瀑布流佈局 (Masonry Grid)」。因為作品包含直式的海報/紅包袋設計、橫式的 Python 程式碼截圖、以及正方形的修繕對比圖，瀑布流能最自然地錯落排列。
+- 互動效果 (Hover State)：
+  - 預設狀態下，圖片上覆蓋一層極淡的深色遮罩。
+  - 當滑鼠懸停 (Hover) 在某個作品卡片上時，遮罩變深，並從卡片底部滑出該作品的「標題」與「簡短說明」（例如：『邏輯的軌跡 - 飯店自動化報表腳本』或『修繕的軌跡 - 電路板修復紀錄』）。
+- 切換動畫：點擊分類標籤時，不屬於該分類的卡片要平滑淡出並縮小 (Scale down)，留下的卡片自動重新排列。
+- 手機版：維持分類按鈕可橫向滑動 (Swipeable)，下方卡片改為單欄或雙欄的緊湊排列。
+
+[Section SDD 結束]
+
+[A3] 目前的 index.html 內容（請貼上 Phase 1 產出的完整檔案）：
+
+[index.html 開始]
+
 <!doctype html>
 <html lang="zh-Hant">
   <head>
@@ -293,76 +334,12 @@
         background-color: #faf9f6;
       }
 
-      .projects-intro {
+      .projects-note {
+        font-size: 0.95rem;
         color: #555555;
-      }
-
-      .projects-filters {
-        display: flex;
-        gap: 0.6rem;
-        overflow-x: auto;
-        padding-bottom: 0.5rem;
-        margin-bottom: 1.5rem;
-      }
-
-      .filter-button {
-        white-space: nowrap;
-        border: 1px solid #8b9467;
-        background-color: #ffffff;
-        padding: 0.45rem 0.9rem;
-        border-radius: 999px;
-        font-size: 0.9rem;
-        cursor: default;
-        transition: all 0.25s ease;
-      }
-
-      .filter-button:hover {
-        background-color: #8b9467;
-        color: #ffffff;
-      }
-
-      .projects-grid {
-        column-count: 1;
-        column-gap: 1rem;
-      }
-
-      .project-card {
-        position: relative;
-        margin-bottom: 1rem;
-        overflow: hidden;
-        break-inside: avoid;
-        border-radius: 0.6rem;
-      }
-
-      .project-overlay {
-        position: absolute;
-        inset: 0;
-        background-color: rgba(0, 0, 0, 0.15);
-        transition: background-color 0.3s ease;
-        display: flex;
-        align-items: flex-end;
-      }
-
-      .project-card:hover .project-overlay {
-        background-color: rgba(0, 0, 0, 0.55);
-      }
-
-      .project-info {
-        width: 100%;
+        background-color: #f1f1ec;
         padding: 0.75rem;
-        transform: translateY(100%);
-        transition: transform 0.3s ease;
-        color: #ffffff;
-        font-size: 0.9rem;
-      }
-
-      .project-card:hover .project-info {
-        transform: translateY(0);
-      }
-
-      .project-title {
-        font-weight: 600;
-        margin-bottom: 0.25rem;
+        border-left: 4px solid #8b9467;
       }
 
       /* ===============================
@@ -373,106 +350,26 @@
            CSS:CONTACT-START
         =============================== */
 
-     .section-contact {
+      .section-contact {
         background-color: #ffffff;
       }
 
-      .contact-layout {
-        display: flex;
-        flex-direction: column;
-        border-radius: 1rem;
-        overflow: hidden;
-        box-shadow: 0 10px 28px rgba(0, 0, 0, 0.08);
+      .contact-list {
+        list-style: none;
+        padding: 0;
+        margin: 1rem 0;
       }
 
-      .contact-intro {
-        padding: 2rem;
-        background: linear-gradient(
-          135deg,
-          #FAF9F6 0%,  /* 亞麻白 */
-          #F2F0E9 50%, /* 稍深的燕麥奶色 */
-          #FAF9F6 100%
-        );
-        color: #1a2238;
+      .contact-list li {
+        margin-bottom: 0.5rem;
       }
 
-      .contact-intro h2 {
-        font-size: 1.7rem;
-        margin-bottom: 1rem;
-      }
-
-      .contact-form-wrapper {
-        padding: 2rem;
-        background-color: rgba(255, 255, 255, 0.96);
-      }
-
-      .form-group {
-        position: relative;
-        margin-bottom: 1.8rem;
-      }
-
-      .form-input,
-      .form-textarea,
-      .form-select {
-        width: 100%;
-        border: none;
-        border-bottom: 2px solid #d9d9d9;
-        padding: 0.6rem 0;
-        font-size: 1rem;
-        background: transparent;
-        outline: none;
-        transition: all 0.25s ease;
-      }
-
-      .form-textarea {
-        resize: vertical;
-        min-height: 100px;
-      }
-
-      .form-label {
-        position: absolute;
-        left: 0;
-        top: 0.6rem;
+      .contact-note {
         font-size: 0.95rem;
-        color: #777777;
-        pointer-events: none;
-        transition: all 0.25s ease;
-      }
-
-      .form-input:focus,
-      .form-textarea:focus,
-      .form-select:focus {
-        border-bottom: 2px solid #8b9467;
-      }
-
-      .form-input:focus + .form-label,
-      .form-input:not(:placeholder-shown) + .form-label,
-      .form-textarea:focus + .form-label,
-      .form-textarea:not(:placeholder-shown) + .form-label {
-        transform: translateY(-1.2rem);
-        font-size: 0.75rem;
-        color: #8b9467;
-      }
-
-      .form-select {
-        margin-top: 0.5rem;
-      }
-
-      .submit-button {
-        margin-top: 1rem;
-        background-color: #1a2238;
-        color: #ffffff;
-        border: none;
-        padding: 0.7rem 1.4rem;
-        border-radius: 0.5rem;
-        font-size: 0.95rem;
-        cursor: pointer;
-        transition: all 0.25s ease;
-      }
-
-      .submit-button:hover {
-        transform: translateY(-2px);
-        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.18);
+        color: #555555;
+        background-color: #f1f1ec;
+        padding: 0.75rem;
+        border-left: 4px solid #8b9467;
       }
 
       /* ===============================
@@ -536,6 +433,7 @@
            CSS:RWD-END
         =============================== */
     </style>
+
   </head>
 
   <body>
@@ -695,181 +593,73 @@
         <!-- SECTION:SKILLS-END -->
 
         <!-- SECTION:PROJECTS-START -->
-       <section
+        <section
           id="projects"
           class="section section-projects"
           aria-labelledby="projects-heading"
         >
           <div class="container">
+            <h2 id="projects-heading" class="section-title">
+              作品與軌跡（之後會用 Section SDD 替換）
+            </h2>
 
-            <div class="projects-header">
-              <h2 id="projects-heading" class="section-title">
-                軌跡 (Trace) - 時間留下的印記
-              </h2>
+            <p>
+              這裡目前是 Projects 區的占位內容，
+              未來會展示你的代表作品、專案案例或人生重要里程碑，
+              並附上圖片與說明。
+            </p>
 
-              <p class="projects-intro">
-                每一項產出，都是一段專注時光的凝結。這裡記錄了我與不同領域碰撞出的火花，是我在多元人生中一步步留下的實踐痕跡。
-              </p>
-            </div>
-
-            <div class="projects-filters">
-              <div class="filter-button">邏輯的軌跡</div>
-              <div class="filter-button">音符的軌跡</div>
-              <div class="filter-button">修繕的軌跡</div>
-              <div class="filter-button">視覺的軌跡</div>
-            </div>
-
-            <div class="projects-grid">
-
-              <div class="project-card">
-                <img
-                  src="https://images.unsplash.com/photo-1555949963-aa79dcee981c"
-                  alt="Python 程式碼與數據分析畫面"
-                  loading="lazy"
-                />
-                <div class="project-overlay">
-                  <div class="project-info">
-                    <div class="project-title">
-                      邏輯的軌跡 - 自動化報表腳本
-                    </div>
-                    透過 Python 建立每日營運報表生成流程。
-                  </div>
-                </div>
-              </div>
-
-              <div class="project-card">
-                <img
-                  src="https://images.unsplash.com/photo-1511379938547-c1f69419868d"
-                  alt="專注演奏小提琴的音樂家"
-                  loading="lazy"
-                />
-                <div class="project-overlay">
-                  <div class="project-info">
-                    <div class="project-title">
-                      音符的軌跡 - 學生成果發表
-                    </div>
-                    指導學生完成年度演奏成果。
-                  </div>
-                </div>
-              </div>
-
-              <div class="project-card">
-                <img
-                  src="https://images.unsplash.com/photo-1581093458791-9d8e8f50b9b3"
-                  alt="維修電路板的工作過程"
-                  loading="lazy"
-                />
-                <div class="project-overlay">
-                  <div class="project-info">
-                    <div class="project-title">
-                      修繕的軌跡 - 電路板修復
-                    </div>
-                    找出短路點並完成重新焊接。
-                  </div>
-                </div>
-              </div>
-
-              <div class="project-card">
-                <img
-                  src="https://images.unsplash.com/photo-1507209696998-3c532be9b2b5"
-                  alt="平面設計海報作品展示"
-                  loading="lazy"
-                />
-                <div class="project-overlay">
-                  <div class="project-info">
-                    <div class="project-title">
-                      視覺的軌跡 - 節慶紅包袋設計
-                    </div>
-                    以傳統文化為主題的視覺創作。
-                  </div>
-                </div>
-              </div>
-
-            </div>
-
+            <p class="projects-note">
+              之後會用 Section SDD 的 Prompt 產生新的 section， 請把新的 section
+              程式碼整段貼在這兩個註解中間， 完全取代現在這一區。
+            </p>
           </div>
         </section>
         <!-- SECTION:PROJECTS-END -->
 
         <!-- SECTION:CONTACT-START -->
-        <section id="contact" class="section section-contact" aria-labelledby="contact-heading">
+        <section
+          id="contact"
+          class="section section-contact"
+          aria-labelledby="contact-heading"
+        >
           <div class="container">
+            <h2 id="contact-heading" class="section-title">
+              聯絡與交流（之後會用 Section SDD 替換）
+            </h2>
 
-            <div class="contact-layout">
+            <p>
+              這裡目前是 Contact 區的占位內容， 未來會放上
+              Email、電話、社群連結或合作邀請資訊。
+            </p>
 
-              <div class="contact-intro">
-                <h2 id="contact-heading">
-                  與我交流 (Connect)
-                </h2>
+            <ul class="contact-list">
+              <li>
+                電子郵件：
+                <a href="mailto:hello@example.com"> hello@example.com </a>
+              </li>
+              <li>
+                聯絡電話：
+                <a href="tel:+886900000000"> +886 900-000-000 </a>
+              </li>
+              <li>
+                GitHub：
+                <a href="https://github.com/yourname">
+                  https://github.com/yourname
+                </a>
+              </li>
+              <li>
+                LinkedIn：
+                <a href="https://www.linkedin.com/in/yourname">
+                  https://www.linkedin.com/in/yourname
+                </a>
+              </li>
+            </ul>
 
-                <p>
-                  無論你想討論一段精確的代碼、預約一場優雅的演奏，或是需要生活空間的修繕建議。
-                  在晨曦微光中，我靜候每一場關於美好的交流。
-                </p>
-              </div>
-
-              <div class="contact-form-wrapper">
-
-                <form action="mailto:hello@example.com" method="post" enctype="text/plain">
-
-                  <div class="form-group">
-                    <input
-                      type="text"
-                      name="name"
-                      required
-                      placeholder=" "
-                      class="form-input"
-                    />
-                    <label class="form-label">
-                      如何稱呼追求質感的你？
-                    </label>
-                  </div>
-
-                  <div class="form-group">
-                    <label>
-                      你想在哪個維度與我相遇？
-                    </label>
-
-                    <select
-                      name="topic"
-                      required
-                      class="form-select"
-                    >
-                      <option value="">請選擇主題</option>
-                      <option>數位合作</option>
-                      <option>音樂演出</option>
-                      <option>修繕諮詢</option>
-                      <option>體態教練</option>
-                      <option>其他靈魂碰撞</option>
-                    </select>
-                  </div>
-
-                  <div class="form-group">
-                    <textarea
-                      name="message"
-                      required
-                      placeholder=" "
-                      class="form-textarea"
-                    ></textarea>
-
-                    <label class="form-label">
-                      寫下你的故事或需求，讓我們一同創造豐盛。
-                    </label>
-                  </div>
-
-                  <button
-                    type="submit"
-                    class="submit-button"
-                  >
-                    發送訊息 (Send)
-                  </button>
-
-                </form>
-
-              </div>
-
-            </div>
-
+            <p class="contact-note">
+              之後會用 Section SDD 的 Prompt 產生新的 section， 請把新的 section
+              程式碼整段貼在這兩個註解中間， 完全取代現在這一區。
+            </p>
           </div>
         </section>
         <!-- SECTION:CONTACT-END -->
@@ -882,5 +672,160 @@
         </div>
       </footer>
     </div>
+
   </body>
 </html>
+[index.html 結束]
+
+━━━━━━━━━━━━━━━━━━
+
+# Section 更新規格書 v1.0
+
+（Section Update Spec）
+
+一、前置條件與全域規則
+
+1. index.html 來源
+   - 檔案為單一 `index.html`。
+   - `<head>` 內只有一個 `<style>`，所有 CSS 皆寫在其中。
+
+2. HTML 結構與插槽註解
+   - HTML 內包含以下 SECTION 註解插槽，名稱固定：
+     - `SECTION:HERO-START / SECTION:HERO-END`
+     - `SECTION:ABOUT-START / SECTION:ABOUT-END`
+     - `SECTION:SKILLS-START / SECTION:SKILLS-END`
+     - `SECTION:PROJECTS-START / SECTION:PROJECTS-END`
+     - `SECTION:CONTACT-START / SECTION:CONTACT-END`
+
+3. CSS 結構與插槽註解
+   - CSS 內包含以下 Slot 區塊註解，名稱固定：
+     - `CSS:BASE`
+     - `CSS:HERO`
+     - `CSS:ABOUT`
+     - `CSS:SKILLS`
+     - `CSS:PROJECTS`
+     - `CSS:CONTACT`
+     - `CSS:RWD`
+
+4. 全域風格與限制（沿用 Phase 1 規格）
+   - 禁止使用任何 JavaScript：
+     - 不得出現 `<script>`、`onclick`、`addEventListener` 等。
+   - CSS 禁用 ID 選擇器：
+     - 不得出現任何 `#something` 的 CSS 選擇器。
+   - 圖片來源：
+     - `<img>` 的 `src` 皆為 Unsplash 相關 URL，且具備合理且非空的 `alt` 屬性。
+   - 標題層級：
+     - 全站僅有一個 `<h1>`，位於 Hero 區。
+   - RWD 策略：
+     - 採用手機優先（mobile-first），在 320px / 768px / 1440px 寬度下不應產生水平捲動（依 CSS 設計推估）。
+
+二、更新目標
+
+1. 依據 [A1] 指定的 Section 名稱（Hero / About / Skills / Projects / Contact），
+2. 使用 [A2] 提供的 Section SDD（單一區塊規格），
+3. 在不破壞「前置條件與全域規則」的前提下，只更新該 Section 的：
+   - 對應 HTML 區段（SECTION 插槽中的 `<section>...</section>`）
+   - 對應 CSS Slot（以及必要時在 CSS:RWD 中新增/調整對應樣式）。
+
+三、可修改範圍
+
+1. HTML：只修改對應 SECTION 插槽內的 `<section>...</section>`
+
+- 若 [A1] = `Hero`：
+  - 修改範圍：
+    - `<!-- SECTION:HERO-START -->`
+    - `<!-- SECTION:HERO-END -->` 之間的 `<section>...</section>`
+
+- 若 [A1] = `About`：
+  - 修改範圍：
+    - `<!-- SECTION:ABOUT-START -->`
+    - `<!-- SECTION:ABOUT-END -->` 之間的 `<section>...</section>`
+
+- 若 [A1] = `Skills`：
+  - 修改範圍：
+    - `<!-- SECTION:SKILLS-START -->`
+    - `<!-- SECTION:SKILLS-END -->` 之間的 `<section>...</section>`
+
+- 若 [A1] = `Projects`：
+  - 修改範圍：
+    - `<!-- SECTION:PROJECTS-START -->`
+    - `<!-- SECTION:PROJECTS-END -->` 之間的 `<section>...</section>`
+
+- 若 [A1] = `Contact`：
+  - 修改範圍：
+    - `<!-- SECTION:CONTACT-START -->`
+    - `<!-- SECTION:CONTACT-END -->` 之間的 `<section>...</section>`
+
+HTML 必須遵守以下原則：
+
+- SECTION 註解本身（START / END）必須保留，名稱與位置不變。
+- 註解中間需包含一個完整的 `<section>...</section>` 結構。
+- `section` 的 `id` 預設維持原本命名（hero / about / skills / projects / contact），除非 Section SDD 明確要求變更。
+- 非 Hero 區的更新不得新增額外 `<h1>` 元素。
+
+2. CSS：只修改對應 CSS Slot ＋ 必要時的 RWD 區塊
+
+- 若 [A1] = `Hero`：
+  - 主要修改範圍：`/* CSS:HERO-START */` ~ `/* CSS:HERO-END */`
+
+- 若 [A1] = `About`：
+  - 主要修改範圍：`/* CSS:ABOUT-START */` ~ `/* CSS:ABOUT-END */`
+
+- 若 [A1] = `Skills`：
+  - 主要修改範圍：`/* CSS:SKILLS-START */` ~ `/* CSS:SKILLS-END */`
+
+- 若 [A1] = `Projects`：
+  - 主要修改範圍：`/* CSS:PROJECTS-START */` ~ `/* CSS:PROJECTS-END */`
+
+- 若 [A1] = `Contact`：
+  - 主要修改範圍：`/* CSS:CONTACT-START */` ~ `/* CSS:CONTACT-END */`
+
+如需針對該 Section 設計 RWD 行為（例如桌機版左右雙欄、調整間距等），  
+可在 `/* CSS:RWD-START */` ~ `/* CSS:RWD-END */` 之間，新增或調整對應的 `@media` 區塊。
+
+CSS 必須遵守以下原則：
+
+- 僅使用元素選擇器與 class 選擇器，不得新增或保留任何 `#id` 選擇器。
+- 其他 Section 對應的 CSS Slot（非本次 [A1] 指定者）不做修改。
+- 新增樣式應以該 Section 的 class（如 `.section-hero`、`.section-about` 等）為主。
+
+四、輸出內容要求
+
+1. 在更新完成後，須輸出「更新後完整的 `index.html`」內容：
+   - 可直接覆蓋原始 `index.html` 使用。
+   - 建議放在單一程式碼區塊中，無需額外說明文字。
+
+2. 在輸出 `index.html` 前，應整理一份簡短的變更摘要（3～8 點）：
+   - 說明本次更新針對該 Section 做了哪些修改，例如：
+     - 更新 About 文案內容
+     - 新增一張 Unsplash 圖片與說明文字
+     - 調整桌機版為左右雙欄排版
+     - 增加按鈕與 hover 效果等。
+
+五、自我檢查清單（Section 更新後）
+
+更新並輸出 `index.html` 前，需確認以下事項：
+
+1. 標題與結構
+   - [ ] 全站仍然只有一個 `<h1>`，位於 Hero 區。
+   - [ ] 所有 SECTION 插槽註解（HERO / ABOUT / SKILLS / PROJECTS / CONTACT）名稱完整保留。
+
+2. CSS 結構
+   - [ ] 所有 CSS Slot 註解（BASE / HERO / ABOUT / SKILLS / PROJECTS / CONTACT / RWD）完整保留。
+   - [ ] 新增或修改的 CSS 選擇器皆未使用 `#id`。
+
+3. 連結與圖片
+   - [ ] 新增或修改的 `<a>`，`href` 皆為非空，且不是單純的 `#`。
+   - [ ] 新增或修改的 `<img>`：  
+          - `src` 來源為 Unsplash。  
+          - `alt` 內容合理且非空。
+
+4. RWD 與版面
+   - [ ] 依更新後的 CSS 推估，在 320px / 768px / 1440px 下不會產生水平捲動。
+   - [ ] 更新後的 Section 排版與 Section SDD 的需求一致（例如欄數、對齊方式、重點資訊呈現）。
+
+━━━━━━━━━━━━━━━━━━
+
+請根據以上《Section 更新規格書 v1.0》，
+使用 [A1] / [A2] / [A3] 提供的資訊，只更新指定的 Section，
+並輸出更新後完整的 `index.html`。
